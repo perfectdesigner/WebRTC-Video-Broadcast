@@ -12,7 +12,9 @@ const config = {
   ]
 };
 
-const socket = io.connect(window.location.origin);
+const socket = io.connect("https://flexinterativa-socketio.ngrok.io");
+//const socket = io.connect(window.location.origin);
+//https://flexinterativa-socketio.ngrok.io
 
 socket.on("answer", (id, description) => {
   peerConnections[id].setRemoteDescription(description);

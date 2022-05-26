@@ -1,5 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+const { v4 } = require("uuid");
+
+app.use(cors({
+
+  origin: '*',
+  
+  }))
 
 let broadcaster;
 const port = 4000;
@@ -7,8 +15,23 @@ const port = 4000;
 const http = require("http");
 const server = http.createServer(app);
 
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
 app.use(express.static(__dirname + "/public"));
+
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res, next) => {
+    const roomId = v4();
+    return res.redirect(`/${roomId}`)
+});
+
+
 
 io.sockets.on("error", e => console.log(e));
 io.sockets.on("connection", socket => {

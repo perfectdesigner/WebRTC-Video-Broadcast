@@ -12,7 +12,10 @@ const config = {
   ]
 };
 
-const socket = io.connect(window.location.origin);
+const socket = io.connect("https://flexinterativa-socketio.ngrok.io"); // NGROK OR LOLCAL window.locate.origin
+//const socket = io.connect(window.location.origin);
+//https://flexinterativa-socketio.ngrok.io
+
 const video = document.querySelector("video");
 const enableAudioButton = document.querySelector("#enable-audio");
 
